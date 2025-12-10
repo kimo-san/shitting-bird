@@ -1,12 +1,5 @@
-#include "Pins.h"
 #include "Arduino.h" 
-
-Pins::Pins(
-  int WTR, int PDR, int MXR
-): WTR(WTR), PDR(PDR), MXR(MXR)
-{
-  // empty block
-}
+#include "Pins.h"
 
 void Pins::setup()
 {
@@ -15,6 +8,10 @@ void Pins::setup()
   pinMode(MXR, OUTPUT);
   pinMode(PDR, OUTPUT);
 
+}
+
+void turnOn(int pin) {
+  digitalWrite(pin, HIGH);
 }
 
 void Pins::cancelAll()

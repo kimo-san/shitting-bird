@@ -8,18 +8,23 @@ class Components
 
   public:
 
-    Components(Pins pins);
+    Components(Pins& pins);
 
-    void addWater(int duration_millis);
+    void addWater(int ml_to_add);
     void addPowder(int rotation_times);
     void mix(int rotation_times);
+    void shitOut();
 
     void makeCancellable(bool(*cancel_check)());
-
+    double getCurrentMl();
 
   private:
-    Pins pins;
+
+    Pins& pins;
     bool(*cancel_check)();
+    double current_ml;
+
+
 };
 
 

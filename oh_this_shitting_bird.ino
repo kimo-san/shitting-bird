@@ -1,32 +1,38 @@
-#include "Arduino.h" 
+#include "Arduino.h"
 #include "Pins.h"
 #include "Components.h"
 #include "Program.h"
+#include "Consts.h"
 
-Pins pins = Pins(8, 11, 9);
-Components comp = Components(pins);
+Pins pins { WATER_PIN, POWDER_PIN, MIXER_PIN, CREAM_OUT_PIN };
+Components comp(pins);
 
 String serial_text = "";
 void updateText()
 {
   String newInput = Serial.readStringUntil('\n');
-  if (newInput != "") serial_text = newInput;
+  newInput.trim();
+  if (newInput != "" && newInput != serial_text) {
+    serial_text = newInput;
+    Serial.println("-> Got text: " + serial_text);
+  }
   serial_text.trim();
 }
 
-bool stopExecution()
+bool listenCommands()
 {
 
   updateText();
-  
-  Serial.println("-> current text: " + serial_text);
 
-  bool result = serial_text.equalsIgnoreCase("c");
-  if (result) {
+  bool isCancelled = serial_text.equalsIgnoreCase("c");
+  if (isCancelled) {
     pins.cancelAll();
-    Serial.println("-> Stopped!");
+    Serial.println((String)
+      "-> Cancelled!" +
+      "\n\t> current_ml = " + comp.getCurrentMl()
+    );
   }
-  return result;
+  return isCancelled;
 
 }
 
@@ -35,9 +41,11 @@ void setup()
 {
 
   pins.setup();
-  comp.makeCancellable(stopExecution);
+  pins.cancelAll();
+  comp.makeCancellable(listenCommands);
   Serial.begin(9600);
-  Serial.setTimeout(10);
+  Serial.setTimeout(listenTimeOut_USB);
+  Serial.println("Ready to use!");
 
 }
 
@@ -45,12 +53,11 @@ void loop()
 {
 
   updateText();
-  Serial.println(serial_text);
 
   if (serial_text.equalsIgnoreCase("d"))
   {
     Serial.println("-> Executing!");
-    program(comp, stopExecution);
+    program(comp, listenCommands);
     Serial.println("-> Execution finished.");
     serial_text = "";
   }

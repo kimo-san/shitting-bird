@@ -1,24 +1,18 @@
 #ifndef Pins_h
 #define Pins_h
 
-class Pins {
+struct Pins {
 
-  public:
+  const int WTR; // water
+  const int PDR; // powder
+  const int MXR; // mixer
+  const int CRM; // cream
 
-    int WTR; // water
-    int PDR; // powder
-    int MXR; // mixer
+  void setup();
+  void cancelAll();
 
-    Pins(
-      int WTR,
-      int PDR,
-      int MXR
-    );
-
-    void setup();
-    void cancelAll();
-    
 };
 
+void turnOn(const int pin);
 
 #endif
