@@ -7,6 +7,7 @@ void Pins::setup()
   pinMode(WTR, OUTPUT);
   pinMode(MXR, OUTPUT);
   pinMode(PDR, OUTPUT);
+  pinMode(CRM, OUTPUT);
 
 }
 
@@ -20,5 +21,6 @@ void Pins::cancelAll()
   digitalWrite(WTR, LOW);
   digitalWrite(MXR, LOW);
   digitalWrite(PDR, LOW);
+  digitalWrite(CRM, LOW);
 
 }

@@ -3,8 +3,8 @@
 #include "Pins.h"
 #include "Consts.h"
 
-static int check_time() { return max(1, 100 - Serial.getTimeout()); }
-static bool noncancellable() { return false; }
+static const int check_time() { return max(1, 100 - Serial.getTimeout()); }
+static const bool noncancellable() { return false; }
 
 Components::Components(Pins& pins)
   :pins(pins), cancel_check(noncancellable), current_ml(0.0)
