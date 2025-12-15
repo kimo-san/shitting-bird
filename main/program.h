@@ -1,8 +1,9 @@
 #include "Components.h"
+#include "HardwareFassade.h"
 
 static const int delay_time = 100;
 
-void program(
+void execute_program(
   Components &comp,
   bool (*cancelCheck)()
   )
@@ -12,19 +13,19 @@ void program(
   {
 
     if (cancelCheck()) return;
-    delay(delay_time);
+    wait(delay_time);
     if (cancelCheck()) return;
     
     comp.addWater(7);
     
     if (cancelCheck()) return;
-    delay(delay_time);
+    wait(delay_time);
     if (cancelCheck()) return;
     
     comp.addPowder(1);
     
     if (cancelCheck()) return;
-    delay(delay_time);
+    wait(delay_time);
     if (cancelCheck()) return;
     
     comp.mix(5);

@@ -1,4 +1,4 @@
-#include "Arduino.h" 
+#include "Arduino.h"
 #include "Pins.h"
 
 void Pins::setup()
