@@ -1,10 +1,16 @@
 #ifndef Components_h
 #define Components_h
 
-#include "Pins.h"
+#include <Pins.h>
 
 class Components
 {
+
+  private:
+    Pins& pins;
+    bool(*cancel_check)();
+    double current_ml;
+
 
   public:
 
@@ -18,12 +24,8 @@ class Components
     void makeCancellable(bool(*cancel_check)());
     double getCurrentMl();
 
-  private:
-
-    Pins& pins;
-    bool(*cancel_check)();
-    double current_ml;
-
+    bool(*getCancelCheck())() { return cancel_check; }
+    Pins getPins() { return pins; };
 
 };
 

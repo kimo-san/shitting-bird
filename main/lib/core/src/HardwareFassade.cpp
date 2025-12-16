@@ -1,7 +1,10 @@
-#include "Arduino.h"
+#include <Arduino.h>
 #include <SoftwareSerial.h>
+#include <Consts.h>
 #include "HardwareFassade.h"
-#include "Consts.h"
+
+void wait(int millis) { delay(millis); };
+
 
 SoftwareSerial bluetooth(BLUETOOTH_RX_PIN, BLUETOOTH_TX_PIN);
 
@@ -19,9 +22,11 @@ void SerialFassade::setup()
 
   bluetooth.begin(9600);
   bluetooth.setTimeout(timeout_BLU);
-
+  delay(500);
   println("AT+NAME" + BLUETOOTH_NAME);
+  delay(500);
   println("AT+PASS" + BLUETOOTH_PASS);
+  delay(500);
 
 };
 
@@ -77,6 +82,5 @@ String SerialFassade::readChars()
   return text;
 };
 
-void wait(int millis) { delay(millis); };
 
 SerialFassade serial;

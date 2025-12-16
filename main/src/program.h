@@ -1,9 +1,11 @@
-#include "Components.h"
-#include "HardwareFassade.h"
+#ifndef Program_h
+#define Program_h
+#include <Components.h>
+#include <HardwareFassade.h>
 
 static const int delay_time = 100;
 
-void execute_program(
+static void execute_program(
   Components &comp,
   bool (*cancelCheck)()
   )
@@ -37,3 +39,5 @@ void execute_program(
   comp.shitOut();
 
 }
+
+#endif

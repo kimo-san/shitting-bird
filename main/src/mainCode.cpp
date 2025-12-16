@@ -1,14 +1,14 @@
-#include "Pins.h"
-#include "Components.h"
+#include <Pins.h>
+#include <Components.h>
+#include <Consts.h>
+#include <HardwareFassade.h>
 #include "Program.h"
-#include "Consts.h"
-#include "HardwareFassade.h"
 
-Pins pins { WATER_PIN, POWDER_PIN, MIXER_PIN, CREAM_OUT_PIN };
-Components comp(pins);
+static Pins pins { WATER_PIN, POWDER_PIN, MIXER_PIN, CREAM_OUT_PIN };
+static Components comp(pins);
 
-String serial_text = "";
-void updateText()
+static String serial_text = "";
+static void updateText()
 {
 
   String newInput = serial.readChars();
@@ -20,7 +20,7 @@ void updateText()
 
 }
 
-bool listenCommands()
+static bool listenCommands()
 {
 
   updateText();
@@ -38,9 +38,9 @@ bool listenCommands()
 
 }
 
-
-void setup()
+static void runMainSketch()
 {
+
 
   pins.setup();
   pins.cancelAll();
@@ -48,20 +48,21 @@ void setup()
   serial.setup();
   serial.println("Ready to use!");
 
-}
 
-String buff="";
-void loop()
-{
-  
-  updateText();
-
-  if (serial_text.equalsIgnoreCase("d") || serial.isButtonPressed())
+  String buff="";
+  while (true)
   {
-    serial.println("-> Executing!");
-    execute_program(comp, listenCommands);
-    serial.println("-> Execution finished.");
-    serial_text = "";
+    
+    updateText();
+
+    if (serial_text.equalsIgnoreCase("d") || serial.isButtonPressed())
+    {
+      serial.println("-> Executing!");
+      execute_program(comp, listenCommands);
+      serial.println("-> Execution finished.");
+      serial_text = "";
+    }
+  
   }
 
 }

@@ -1,5 +1,6 @@
 #ifndef Consts_h
 #define Consts_h
+#include <Arduino.h>
 
 // PINS
 const int WATER_PIN = 2; // Насос для чистой воды

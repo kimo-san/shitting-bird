@@ -1,7 +1,7 @@
 #include "HardwareFassade.h"
 #include "Components.h"
-#include "Pins.h"
-#include "Consts.h"
+#include <Pins.h>
+#include <Consts.h>
 
 static const int check_time() { return max(listenSerialTimeOut, cancellationTimeOut - listenSerialTimeOut); }
 static const bool noncancellable() { return false; }
