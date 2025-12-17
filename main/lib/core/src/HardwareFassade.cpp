@@ -8,12 +8,6 @@ void wait(int millis) { delay(millis); };
 
 SoftwareSerial bluetooth(BLUETOOTH_RX_PIN, BLUETOOTH_TX_PIN);
 
-bool SerialFassade::isButtonPressed()
-{
-  delay(timeout_BTN);
-  return digitalRead(BUTTON_PIN) == HIGH;
-};
-
 void SerialFassade::setup()
 {
 

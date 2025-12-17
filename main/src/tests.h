@@ -48,13 +48,12 @@ static void runWaterFlowTest(Pins pins)
 static void runProgramTest(Components comps)
 {
 
-    Pins pins = comps.getPins();
-    bool(*cancel_check)() = comps.getCancelCheck();
+  Pins pins = comps.getPins();
 
-    pins.setup();
-    pins.cancelAll();
-    Serial.println("Running program!");
+  pins.setup();
+  pins.cancelAll();
+  Serial.println("Running program!");
 
-    execute_program(comps, cancel_check);
+  execute_program(comps);
 
 }

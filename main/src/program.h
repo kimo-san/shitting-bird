@@ -6,36 +6,44 @@
 static void execute_program(Components &comp)
 {
 
+  /// проверка на отмену программы
+
   bool (*cancelCheck)() = comp.getCancelCheck();
 
-  auto yield = [cancelCheck] { 
-    if (cancelCheck()) return;
+  auto yield = [&]() -> bool { 
+    if (cancelCheck()) return true;
     wait(100);
-    if (cancelCheck()) return;
+    if (cancelCheck()) return true;
+    return false;
   };
 
-  for (int i = 0; i < 2; i++)
-  {
-    
-    yield();
+  /////
 
-    comp.addWater(7);
+  if (yield()) return;
     
-    yield();
-    
-    comp.addPowder(0.5);
-    
-    yield();
-    
-    comp.mix(5);
+  comp.addPowder(500);
 
-    yield();
+  if (yield()) return;
+
+  comp.addWater(7);
     
-    comp.addWater(7);
+  if (yield()) return;
+    
+  comp.addPowder(500);
+    
+  if (yield()) return;
+    
+  comp.mix(5);
 
-  }
+  if (yield()) return;
+    
+  comp.addWater(7);
 
-  yield();
+  if (yield()) return;
+    
+  comp.mix(10);
+
+  if (yield()) return;
 
   comp.shitOut();
 

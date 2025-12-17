@@ -10,6 +10,7 @@ class Components
     Pins& pins;
     bool(*cancel_check)();
     double current_ml;
+    double current_cream_time;
 
 
   public:
@@ -17,7 +18,7 @@ class Components
     Components(Pins& pins);
 
     void addWater(int ml_to_add);
-    void addPowder(int rotation_times);
+    void addPowder(int time);
     void mix(int rotation_times);
     void shitOut();
 

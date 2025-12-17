@@ -12,7 +12,6 @@ class SerialFassade
   public:
 
     void setup();
-    bool isButtonPressed();
     void println(const String& msg);
     void print(const String& msg);
     String readChars();
@@ -20,8 +19,7 @@ class SerialFassade
   private:
 
     int timeout_USB = 10;
-    int timeout_BTN = 100;
-    int timeout_BLU = listenSerialTimeOut - timeout_USB - timeout_BTN;
+    int timeout_BLU = listenSerialTimeOut - timeout_USB;
 
 };
 

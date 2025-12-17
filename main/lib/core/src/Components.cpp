@@ -3,13 +3,14 @@
 #include <Pins.h>
 #include <Consts.h>
 
-static const int check_time() { return max(listenSerialTimeOut, cancellationTimeOut - listenSerialTimeOut); }
-static const bool noncancellable() { return false; }
+static int check_time() { return max(listenSerialTimeOut, cancellationTimeOut - listenSerialTimeOut); }
+static bool noncancellable() { return false; }
 
 Components::Components(Pins& pins):
   pins(pins),
   cancel_check(noncancellable),
-  current_ml(0.0)
+  current_ml(0.0),
+  current_cream_time(0)
 { }
 
 double Components::getCurrentMl() { return current_ml; }
@@ -55,29 +56,28 @@ void Components::addWater(int ml_to_add)
   pins.cancelAll();
 }
 
-void Components::addPowder(int rotation_times)
+void Components::addPowder(int time)
 {
   pins.cancelAll();
 
   int ms_per_part = check_time();
-
-  int estimated_ms = rotation_times * rotation_duration;
-  int current_ms = 0;
+  int counter = time;
 
   serial.println((String)
     "\nAdding powder:" +
-    "\n\t> rotation_times: " + rotation_times +
-    "\n\t> estimated_ms: " + estimated_ms +
+    "\n\t> time: " + time +
     "\n\t> ms_per_part: " + ms_per_part
   );
 
   turnOn(pins.PDR);
 
-  while (estimated_ms > current_ms)
+  while (
+    current_cream_time < 1000 && counter > 0)
   {
     if (cancel_check()) return;
     wait(ms_per_part);
-    current_ms += ms_per_part;
+    current_cream_time += ms_per_part;
+    counter -= ms_per_part;
   }
 
   pins.cancelAll();
@@ -112,7 +112,34 @@ void Components::mix(int rotation_times)
 }
 
 void Components::shitOut() {
-  // todo
+  
+  pins.cancelAll();
+  
+  int ms_per_part = check_time();
+
+  serial.println((String)
+    "\nPooring water:" +
+    "\n\t> max_capacity: " + max_capacity +
+    "\n\t> current_ml: " + current_ml +
+    "\n\t> ms_per_part: " + ms_per_part
+  );
+
+  turnOn(pins.CRM);
+
+  int current_ms = 10000;
+  while (current_ms > 0) {
+    current_ms -= ms_per_part;
+    if (cancel_check()) return;
+    wait(ms_per_part);
+  }
+
+  pins.cancelAll();
+
+  current_ml = 0;
+  serial.println((String)
+    "\n\t-> container is empty!"
+  );
+
 }
 
 

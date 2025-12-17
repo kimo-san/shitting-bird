@@ -25,7 +25,7 @@ static bool listenCommands()
 
   updateText();
 
-  bool isCancelled = serial_text.equalsIgnoreCase("c") || serial.isButtonPressed();
+  bool isCancelled = serial_text.equalsIgnoreCase("c");
   if (isCancelled) {
     pins.cancelAll();
     serial.println((String)
@@ -55,10 +55,10 @@ static void runMainSketch()
     
     updateText();
 
-    if (serial_text.equalsIgnoreCase("d") || serial.isButtonPressed())
+    if (serial_text.equalsIgnoreCase("d"))
     {
       serial.println("-> Executing!");
-      execute_program(comp, listenCommands);
+      execute_program(comp);
       serial.println("-> Execution finished.");
       serial_text = "";
     }
