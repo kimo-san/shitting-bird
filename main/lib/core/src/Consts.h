@@ -19,9 +19,10 @@ const String BLUETOOTH_PASS = "7216";
 const double pump_speed = 0.004; // Скорость насоса: 40ml/s
 const int max_capacity = 20; // Вмещаемость стакана: 20ml
 const int rotation_duration = 1000; // Время на один полный оборот моторчика
+const int powder_rotation_time_limit = 1000; // Максимальное время, которое позволенно сбрасывать порошок в смесь
 
 // UTIL
-const int cancellationTimeOut = 500; // Максимальное время ожидания отмены операции
+const int cancellationTimeOut = 500; // Время ожидания отмены операции
 const int listenSerialTimeOut = 500; // Сколько времени будет занимать прослушка сериалов
 
 #endif

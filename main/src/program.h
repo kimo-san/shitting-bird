@@ -6,7 +6,7 @@
 static void execute_program(Components &comp)
 {
 
-  /// проверка на отмену программы
+  // проверка на отмену программы
 
   bool (*cancelCheck)() = comp.getCancelCheck();
 
@@ -17,7 +17,7 @@ static void execute_program(Components &comp)
     return false;
   };
 
-  /////
+  ////////////////////
 
   if (yield()) return;
     
@@ -41,7 +41,7 @@ static void execute_program(Components &comp)
 
   if (yield()) return;
     
-  comp.mix(10);
+  comp.mix(5);
 
   if (yield()) return;
 

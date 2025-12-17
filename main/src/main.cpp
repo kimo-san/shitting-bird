@@ -3,18 +3,27 @@
 #include "mainCode.cpp"
 #include "tests.h"
 
+
 void setup() {
 
+    //
+    // Нужный режим - раскомментировать
+    // Одновременно может быть загружен лишь один режим.
+    //
 
-    /* MAIN PROGRAM */
+    /*
+        Главная программа
+    */
 
     //runMainSketch();
 
 
-    /* TESTS */
+    /*
+        Тесты
+    */
     
-    //runCheckPinsTest(pins);
-    //runWaterFlowTest();
+    //runCheckPinsTest(comp);
+    //runWaterFlowTest(comp);
     runProgramTest(comp);
     
 }
