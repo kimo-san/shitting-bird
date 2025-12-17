@@ -3,38 +3,39 @@
 #include <Components.h>
 #include <HardwareFassade.h>
 
-static const int delay_time = 100;
-
-static void execute_program(
-  Components &comp,
-  bool (*cancelCheck)()
-  )
+static void execute_program(Components &comp)
 {
 
-  for (int i = 0; i < 4; i++)
-  {
+  bool (*cancelCheck)() = comp.getCancelCheck();
 
+  auto yield = [cancelCheck] { 
     if (cancelCheck()) return;
-    wait(delay_time);
+    wait(100);
     if (cancelCheck()) return;
+  };
+
+  for (int i = 0; i < 2; i++)
+  {
     
+    yield();
+
     comp.addWater(7);
     
-    if (cancelCheck()) return;
-    wait(delay_time);
-    if (cancelCheck()) return;
+    yield();
     
-    comp.addPowder(1);
+    comp.addPowder(0.5);
     
-    if (cancelCheck()) return;
-    wait(delay_time);
-    if (cancelCheck()) return;
+    yield();
     
     comp.mix(5);
+
+    yield();
     
+    comp.addWater(7);
+
   }
 
-  if (cancelCheck()) return;
+  yield();
 
   comp.shitOut();
 
