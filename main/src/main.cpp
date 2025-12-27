@@ -10,21 +10,13 @@ void setup() {
     // Нужный режим - раскомментировать
     // Одновременно может быть загружен лишь один режим.
     //
-
-    /*
-        Главная программа
-    */
-
-    //runMainSketch();
-
-
-    /*
-        Тесты
-    */
     
+    Serial.println("Actually this code works");
+    runMainSketch();
     //runCheckPinsTest(comp);
     //runWaterFlowTest(comp);
-    runProgramTest(comp);
+
+    //runProgramTest(comp);
     
 }
 

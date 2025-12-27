@@ -72,7 +72,8 @@ void Components::addPowder(int time)
   turnOn(pins.PDR);
 
   while (
-    current_cream_time < 1000 && counter > 0)
+    current_cream_time < powder_rotation_time_limit
+    && counter > 0)
   {
     if (cancel_check()) return;
     wait(ms_per_part);

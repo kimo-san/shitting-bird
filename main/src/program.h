@@ -19,30 +19,20 @@ static void execute_program(Components &comp)
 
   ////////////////////
 
-  if (yield()) return;
-    
-  comp.addPowder(500);
+  const int times = 3; 
+  const int mls = max_capacity;
+  const int mss = powder_rotation_time_limit;
 
-  if (yield()) return;
-
-  comp.addWater(7);
-    
-  if (yield()) return;
-    
-  comp.addPowder(500);
-    
-  if (yield()) return;
-    
-  comp.mix(5);
-
-  if (yield()) return;
-    
-  comp.addWater(7);
-
-  if (yield()) return;
-    
-  comp.mix(5);
-
+  comp.addPowder(mss);
+  
+  for (int i = 0; i < times; i++)
+  {
+    if (yield()) return;
+    comp.mix(5);
+    if (yield()) return;
+    comp.addWater(mls / times);
+  }
+  
   if (yield()) return;
 
   comp.shitOut();

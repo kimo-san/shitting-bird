@@ -40,7 +40,7 @@ void SerialFassade::print(const String& msg)
 {
 
   if (bluetooth.available() >= 0) {
-    bluetooth.print(msg);
+    bluetooth.write(msg);
   }
 
   if (Serial.available() >= 0) {
