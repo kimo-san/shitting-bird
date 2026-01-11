@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include "mainCode.cpp"
 #include "tests.h"
@@ -11,13 +10,12 @@ void setup() {
     // Одновременно может быть загружен лишь один режим.
     //
     
-    Serial.println("Actually this code works");
-    runMainSketch();
+    //runMainSketch();
     //runCheckPinsTest(comp);
     //runWaterFlowTest(comp);
-
-    //runProgramTest(comp);
+    //runEmptyTest();
+    runProgramTest(comp);
     
 }
 
-void loop() { }
+void loop() { /* This block will be never reached. */ }

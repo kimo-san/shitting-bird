@@ -8,7 +8,7 @@ void wait(int millis);
 
 class SerialFassade
 {
-
+  
   public:
 
     void setup();
@@ -16,8 +16,8 @@ class SerialFassade
     void print(const String& msg);
     String readChars();
 
-  private:
 
+  private:
     int timeout_USB = 10;
     int timeout_BLU = listenSerialTimeOut - timeout_USB;
 

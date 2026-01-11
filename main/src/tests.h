@@ -3,8 +3,12 @@
 #include <Components.h>
 #include <Pins.h>
 
-
-
+static void runEmptyTest() {
+  
+  pinMode(ALWAYS_ON_PIN, OUTPUT);
+  digitalWrite(ALWAYS_ON_PIN, HIGH);
+  
+}
 
 static void runCheckPinsTest(Components& comps)
 {
@@ -50,7 +54,7 @@ static void runWaterFlowTest(Components& comps)
 
 
 
-#include "program.h"
+#include "Program.h"
 
 // Единичное проигрывание программы.
 static void runProgramTest(Components& comps)

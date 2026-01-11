@@ -7,6 +7,7 @@ struct Pins {
   const int PDR; // powder
   const int MXR; // mixer
   const int CRM; // cream
+  const int ALON;
 
   void setup();
   void cancelAll();

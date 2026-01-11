@@ -4,7 +4,7 @@
 #include <HardwareFassade.h>
 #include "Program.h"
 
-static Pins pins { WATER_PIN, POWDER_PIN, MIXER_PIN, CREAM_OUT_PIN };
+static Pins pins { WATER_PIN, POWDER_PIN, MIXER_PIN, CREAM_OUT_PIN, ALWAYS_ON_PIN };
 static Components comp(pins);
 
 static String serial_text = "";

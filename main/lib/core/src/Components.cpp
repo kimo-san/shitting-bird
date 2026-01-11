@@ -119,7 +119,7 @@ void Components::shitOut() {
   int ms_per_part = check_time();
 
   serial.println((String)
-    "\nPooring water:" +
+    "\nPooring out cream:" +
     "\n\t> max_capacity: " + max_capacity +
     "\n\t> current_ml: " + current_ml +
     "\n\t> ms_per_part: " + ms_per_part
@@ -127,7 +127,7 @@ void Components::shitOut() {
 
   turnOn(pins.CRM);
 
-  int current_ms = 10000;
+  int current_ms = max_capacity*1.5 / pump_speed;
   while (current_ms > 0) {
     current_ms -= ms_per_part;
     if (cancel_check()) return;
