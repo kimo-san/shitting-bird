@@ -1,6 +1,6 @@
+
 #include <Arduino.h>
 #include "mainCode.cpp"
-#include "tests.h"
 
 
 void setup() {
@@ -10,11 +10,10 @@ void setup() {
     // Одновременно может быть загружен лишь один режим.
     //
     
-    //runMainSketch();
+    runMainSketch();
     //runCheckPinsTest(comp);
-    //runWaterFlowTest(comp);
-    //runEmptyTest();
-    runProgramTest(comp);
+    //runWaterinTest(comp);
+    //... any other funktion from `tests.h`
     
 }
 

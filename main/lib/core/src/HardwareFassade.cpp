@@ -14,12 +14,15 @@ void SerialFassade::setup()
   Serial.begin(9600);
   Serial.setTimeout(timeout_USB);
 
+  pinMode(BLUETOOTH_PIN, INPUT);
+  digitalWrite(BLUETOOTH_PIN, HIGH);
   bluetooth.begin(9600);
   bluetooth.setTimeout(timeout_BLU);
   delay(500);
-  println("AT+NAME" + BLUETOOTH_NAME);
+  println("Setting up bluetooth module");
+  bluetooth.println("AT+NAME" + BLUETOOTH_NAME);
   delay(500);
-  println("AT+PASS" + BLUETOOTH_PASS);
+  bluetooth.println("AT+PASS" + BLUETOOTH_PASS);
   delay(500);
 
 };
@@ -39,13 +42,8 @@ void SerialFassade::println(const String& msg)
 void SerialFassade::print(const String& msg)
 {
 
-  if (bluetooth.available() >= 0) {
-    bluetooth.print(msg);
-  }
-
-  if (Serial.available() >= 0) {
-    Serial.print(msg);
-  }
+  bluetooth.print(msg);
+  Serial.print(msg);
 };
 
 String SerialFassade::readChars()
@@ -54,7 +52,7 @@ String SerialFassade::readChars()
   String text = "";
   
   long start = millis();
-  while (millis() - start < timeout_BLU) {
+  while ((millis() - start) < timeout_BLU) {
     
     while (bluetooth.available() > 0) {
       char c = bluetooth.read();

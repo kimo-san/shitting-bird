@@ -1,68 +1,43 @@
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <Pins.h>
 #include <Components.h>
 #include <Consts.h>
 #include <HardwareFassade.h>
-#include "Program.h"
+#include "CommandParser.h"
+#include "Listener.h"
 
 static Pins pins { WATER_PIN, POWDER_PIN, MIXER_PIN, CREAM_OUT_PIN, ALWAYS_ON_PIN };
 static Components comp(pins);
+static Listener listener(pins);
+static CommandParser parser(comp);
 
-static String serial_text = "";
-static void updateText()
-{
-
-  String newInput = serial.readChars();
-
-  if (newInput != "" && newInput != serial_text) {
-    serial_text = newInput;
-    serial.println("-> Got text: " + serial_text);
-  }
-
-}
-
-static bool listenCommands()
-{
-
-  updateText();
-
-  bool isCancelled = serial_text.equalsIgnoreCase("c");
-  if (isCancelled) {
-    pins.cancelAll();
-    serial.println((String)
-      "-> Cancelled!" +
-      "\n\t> current_ml = " + comp.getCurrentMl()
-    );
-  }
-  
-  return isCancelled;
-
-}
+static bool listenCheck() { return listener.listenCommands(); }
 
 static void runMainSketch()
 {
 
-
   pins.setup();
   pins.cancelAll();
-  comp.makeCancellable(listenCommands);
+  comp.makeCancellable(listenCheck);
   serial.setup();
   serial.println("Ready to use!");
 
-
-  String buff="";
   while (true)
   {
     
-    updateText();
+    listener.updateText();
+    String buffer = listener.getText();
 
-    if (serial_text.equalsIgnoreCase("d"))
+    if (listener.gotText())
     {
-      serial.println("-> Executing!");
-      execute_program(comp);
-      serial.println("-> Execution finished.");
-      serial_text = "";
+      serial.println("-> Parsing!");
+      parser.parse(buffer);
+      listener.reset();
     }
-  
   }
 
 }
+
+#endif
