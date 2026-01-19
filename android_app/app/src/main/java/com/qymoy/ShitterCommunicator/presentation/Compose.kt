@@ -139,7 +139,7 @@ fun ConnectedScreen(
                 style = MaterialTheme.typography.headlineSmall,
             )
             Image(
-                painterResource(R.drawable.birds_for_beginners), null,
+                painterResource(R.drawable.bird_by_holger_uwe_schmitt), null,
                 Modifier.align(Alignment.CenterHorizontally),
                 contentScale = ContentScale.Inside
             )

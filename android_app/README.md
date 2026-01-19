@@ -16,3 +16,7 @@
 2. Запишите комманду для контроллера в функцию, лежащую в `/data/CommandMapper.kt`.
 3. По желанию, дополните маппер `/presentation/DisplayCommandName.kt` для более корректного отображения названия комманды во фронтэнде.
 > Искать в `android_app/app/src/main/java/com/qymoy/ShitterCommunicator/`
+
+## Авторство
+> Фотография прекрасной птички была снята Holger Uwe Schmitt под лицензией CC BY-SA 4.0 и опубликована на сайте de.wikipedia.org.
+> ![Stieglitz (Carduelis carduelis), Männchen](app/src/main/res/drawable/bird_by_holger_uwe_schmitt.jpg)
