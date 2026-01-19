@@ -18,5 +18,4 @@
 > Искать в `android_app/app/src/main/java/com/qymoy/ShitterCommunicator/`
 
 ## Авторство
-> Фотография прекрасной птички была снята Holger Uwe Schmitt под лицензией CC BY-SA 4.0 и опубликована на сайте de.wikipedia.org.
-> ![Stieglitz (Carduelis carduelis), Männchen](app/src/main/res/drawable/bird_by_holger_uwe_schmitt.jpg)
+> Фотография [этого прекрасного щегола](app/src/main/res/drawable/bird_by_holger_uwe_schmitt.jpg) была снята Holger Uwe Schmitt под лицензией CC BY-SA 4.0 и опубликована на сайте de.wikipedia.org.
