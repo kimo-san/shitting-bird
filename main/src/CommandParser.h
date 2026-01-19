@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <HardwareFassade.h>
 #include "Program.h"
-#include "tests.h"
+#include "Scripts.h"
 #include "Consts.h"
 
 class CommandParser
@@ -28,7 +28,7 @@ inline void CommandParser::parse(String &command)
     if (command.equalsIgnoreCase(WATER_TEST_CMD))
     {
         serial.println("-> Executing waterflow test");
-        runWaterinTest(components);
+        runWaterTest(components);
     }
     else
     if (command.equalsIgnoreCase(PIN_TEST_CMD))
@@ -41,6 +41,18 @@ inline void CommandParser::parse(String &command)
     {
         serial.println("-> Executing cream-out test");
         runCreamoutTest(components);
+    }
+    else
+    if (command.equalsIgnoreCase(MIX_TEST_CMD)) 
+    {
+        serial.println("-> Executing mix test");
+        runMixTest(components);
+    }
+    else
+    if (command.equalsIgnoreCase(CLEAN_CMD))
+    {
+        serial.println("-> Cleaning device");
+        runCleaning(components);
     }
     else
     {

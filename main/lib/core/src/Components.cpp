@@ -21,6 +21,7 @@ void Components::makeCancellable(bool(*cancel_check)())
 void Components::addWater(int ml_to_add)
 {
   pins.cancelAll();
+  if (cancel_check()) return;
 
   double estimated_ml = current_ml + ml_to_add;
   
@@ -59,6 +60,7 @@ void Components::addWater(int ml_to_add)
 void Components::addPowder(int time)
 {
   pins.cancelAll();
+  if (cancel_check()) return;
 
   int ms_per_part = check_time();
   int counter = time;
@@ -87,6 +89,7 @@ void Components::addPowder(int time)
 void Components::mix(int rotation_times)
 {
   pins.cancelAll();
+  if (cancel_check()) return;
 
   int ms_per_part = check_time();
 
@@ -112,9 +115,10 @@ void Components::mix(int rotation_times)
   pins.cancelAll();
 }
 
-void Components::shitOut() {
-  
+void Components::shitOut()
+{
   pins.cancelAll();
+  if (cancel_check()) return;
   
   int ms_per_part = check_time();
 
@@ -127,7 +131,7 @@ void Components::shitOut() {
 
   turnOn(pins.CRM);
 
-  int current_ms = max_capacity*1.5 / pump_speed;
+  int current_ms = max_capacity / pump_speed;
   while (current_ms > 0) {
     current_ms -= ms_per_part;
     if (cancel_check()) return;

@@ -16,9 +16,12 @@ const int ALWAYS_ON_PIN = 12;
 
 // COMMANDS
 const String EXECUTE_CMD = "d";
+const String CLEAN_CMD = "cl";
 const String WATER_TEST_CMD = "w";
+const String MIX_TEST_CMD = "m";
 const String CREAM_TEST_CMD = "r";
 const String PIN_TEST_CMD = "p";
+//const String WATER_CALIBRATION_CMD = "wc";
 const String CANCEL_CMD = "c";
 
 // CONNECTIVITY
