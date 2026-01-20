@@ -6,7 +6,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.qymoy.ShitterCommunicator.domain.BluetoothController
 import com.qymoy.ShitterCommunicator.domain.BluetoothDevice
-import com.qymoy.ShitterCommunicator.domain.Commands
+import com.qymoy.ShitterCommunicator.domain.Command
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,7 +42,7 @@ class MainViewModel (
 
     val messages = MutableStateFlow(emptyList<String>())
 
-    fun send(mess: Commands) = scope.launch {
+    fun send(mess: Command) = scope.launch {
         try {
             bluetoothController.sendCommand(mess)
         } catch (_: RuntimeException) {
@@ -53,15 +53,15 @@ class MainViewModel (
         }
     }
 
-    fun startDisc() = bluetoothController.startDiscovery()
-    fun stopDisc() = bluetoothController.stopDiscovery()
+    fun startDiscorery() = bluetoothController.startDiscovery()
+    fun stopDiscovery() = bluetoothController.stopDiscovery()
     fun connectTo(device: BluetoothDevice) = scope.launch {
         bluetoothController.connect(device)
-        stopDisc()
+        stopDiscovery()
     }
     fun disconnect(device: BluetoothDevice) = scope.launch {
         bluetoothController.disconnect(device)
-        startDisc()
+        startDiscorery()
     }
 
     init {

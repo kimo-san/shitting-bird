@@ -46,8 +46,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.qymoy.ShitterCommunicator.R
+import com.qymoy.ShitterCommunicator.commands
 import com.qymoy.ShitterCommunicator.domain.BluetoothDevice
-import com.qymoy.ShitterCommunicator.domain.Commands
+import com.qymoy.ShitterCommunicator.domain.Command
 
 private fun toast(context: Context, text: String) =
     Toast.makeText(context, text, Toast.LENGTH_SHORT)
@@ -87,11 +88,11 @@ fun MainContent(vm: MainViewModel) {
 
                 var scanning by remember { mutableStateOf(false) }
                 if (scanning) {
-                    TextButton({ vm.stopDisc(); scanning = false }) {
+                    TextButton({ vm.stopDiscovery(); scanning = false }) {
                         Text("Stop scan")
                     }
                 } else {
-                    TextButton({ vm.startDisc(); scanning = true }) {
+                    TextButton({ vm.startDiscorery(); scanning = true }) {
                         Text("Enable scan")
                     }
                 }
@@ -113,7 +114,7 @@ fun MainContent(vm: MainViewModel) {
 @Composable
 fun ConnectedScreen(
     device: BluetoothDevice,
-    send: (Commands) -> Unit,
+    send: (Command) -> Unit,
     disconnect: (BluetoothDevice) -> Unit,
     terminalText: List<String>
 ) {
@@ -160,7 +161,7 @@ fun ConnectedScreen(
         }
 
         OutlinedButton(
-            { send(Commands.CANCEL_CMD); disconnect(device) },
+            { disconnect(device) },
             Modifier.padding(8.dp)
         ) {
             Text("Disconnect")
@@ -170,7 +171,7 @@ fun ConnectedScreen(
 
 @Composable
 private fun CommandBlock(
-    send: (Commands) -> Unit,
+    send: (Command) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(modifier) {
@@ -182,10 +183,10 @@ private fun CommandBlock(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(8.dp)
         ) {
-            items(Commands.entries) {
+            items(commands) {
                 Button({ send(it) }) {
                     Text(
-                        it.displayName,
+                        it.name,
                         Modifier.fillMaxWidth(),
                         maxLines = 1
                     )
