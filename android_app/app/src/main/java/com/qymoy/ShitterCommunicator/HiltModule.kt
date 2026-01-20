@@ -1,7 +1,7 @@
 package com.qymoy.ShitterCommunicator
 
 import android.content.Context
-import com.qymoy.ShitterCommunicator.data.bluetooth.BluetoothControllerImpl
+import com.qymoy.ShitterCommunicator.data.BluetoothControllerImpl
 import com.qymoy.ShitterCommunicator.domain.BluetoothController
 import dagger.Module
 import dagger.Provides

@@ -13,6 +13,6 @@ interface BluetoothController {
     suspend fun disconnect(device: BluetoothDevice)
 
     val receivedMessages: StateFlow<String>
-    suspend fun sendCommand(command: Commands): Boolean
+    suspend fun sendCommand(command: Command): Boolean
 
 }
