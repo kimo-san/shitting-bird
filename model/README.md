@@ -1,8 +1,8 @@
 # Materials
 ## Electronics
-* 1 Arduino Nano microcontroller
-* 1 HM-10 bluetooth module
-* 4 TIP120 NPN Darlington transistors
+* 1 Arduino Nano
+* 1 HM-10 Bluetooth Module
+* 4 TIP120 NPN transistors
 * Jumper wires
 * Heat shrink tubing
 * Soldering iron
@@ -16,17 +16,17 @@
 * Tools for model post-processing (e.g., cutting, sanding, fitting)
 
 # Arduino Pinout
-|   Pin   | Description |
-|---------|-------------|
-| **GND** | common ground (shared with all transistors and battery negative terminal) |
-| **D2**  | controls transistor connected to the slurry pump |
-| **D3**  | controls transistor connected to the powder dispenser |
-| **D4**  | controls transistor connected to the mixer motor |
-| **D5**  | controls transistor connected to the water pump |
-| **D10** | TX (receives data from Bluetooth module RX) |
-| **D11** | RX (sends data to Bluetooth module TX) |
-| **3V3** | power supply for Bluetooth module |
-| **GND** | ground for Bluetooth module (connected to common ground) |
+|   Pin   | Description                                                                |
+|---------|----------------------------------------------------------------------------|
+| **GND** | common ground (shared with all transistors and battery negative terminal)  |
+| **D2**  | controls transistor connected to the slurry pump                           |
+| **D3**  | controls transistor connected to the powder dispenser                      |
+| **D4**  | controls transistor connected to the mixer motor                           |
+| **D5**  | controls transistor connected to the water pump                            |
+| **D10** | TX (receives data from Bluetooth module RX)                                |
+| **D11** | RX (sends data to Bluetooth module TX)                                     |
+| **3V3** | power supply for Bluetooth module                                          |
+| **GND** | ground for Bluetooth module (connected to common ground)                   |
 
 # Schemas
 ## Transistor block
